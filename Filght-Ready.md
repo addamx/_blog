@@ -31,6 +31,24 @@ https://www.jianshu.com/p/2b9db9d0a63d
 8. this的理解
 函数, 构造函数, 对象方法, 箭头函数
 
+9. 跨域同源
+跨域是浏览器引起的;
+实现跨域: 
+  a.jsonp;
+  b.window.name(当页面加载另一个新的页面时，window的name属性是不会变的);
+  c.cors同源;
+  d.nodejs中间件代理跨域
+
+**cors**:
+前端: 
+服务器: `Access-Control-Allow-Origin` `Access-Control-Allow-Credentials`(可选, 是否发cookie)
+
+>当浏览器发送跨域请求时，如果请求不是GET或者特定POST（Content-Type只能是 application/x-www-form-urlencoded, multipart/form-data 或 text/plain的一种）时，浏览器会要求先以 OPTIONS 请求方式发送一个预请求(preflight request)，从而获知服务器端对跨源请求所支持 HTTP 方法。`服务器设置:'Access-Control-Allow-Methods:POST, GET'`
+
+区别:
+JSONP只支持GET请求，CORS支持所有类型的HTTP请求
+
+注意:
 
 
 ## ES6
@@ -91,6 +109,9 @@ cloneElement 相当于:
 ## 12. setSate的注意问题以及优化方案
 **1. 问题**: setState是异步: 
 后面的操作如果依赖它的结果, 可能会出错;  
+
+
+## 13. react事件为什么要`bind(this)`
 
 **优化**:
 添加回调函数, 如下: 将setState封装为Promise对象, 这样可以用`then`或者`async/await`来控制回调行为;
@@ -158,7 +179,14 @@ require不仅可以引用文件和模块，而且使用位置不受限制，可�
 
 
 # 前端优化
+## 网路请求
+1. 网页Gzip
+2. CDN托管, 图片服务器
+3. 缓存ajax结果, 减少频繁的请求;
+
+
 ## JS
+0. 脚本放最后(除非是非同构的spa)
 1. 避免寻找上层数据, 尽量转位局部变量; 
 2. 多次使用的数据, 尽量转为局部变量; 如`var len = arr.length;` `var height = $node.height();`  //速度: 字面量 > 局部变量 > 数据 > 对象
 3. 判断: 多余2用`switch`, 多余10用`数组或对象储存结果`
@@ -169,17 +197,34 @@ require不仅可以引用文件和模块，而且使用位置不受限制，可�
     6.2 return模式: 转为ES6模式的尾递归 a. return 结果; b. 'use strict'(禁用 arguments, callee);
     6.3 非return模式: `setTimeout`包装;
 
+## 重排重绘
+1. innerHTML代替DOM操作
+2. 如果多个元素要插入, 先插入一个container, 再将container插入DOM
+
 ## HTML
-减少DOM的数量, 压缩
+减少DOM的数量, 压缩文档
+使用svg/css动画替代gif动画以及js动画
+移除iframe, 或者用js在合适时机加载
+避免table, table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢
 
 ## css
-减少选择器, 合并压缩
+合并压缩
+必要的css才放head, 不必要的放body最后(因为 Renderer进程中 JS线程和渲染线程是互斥的)
+
 
 ## 图片
+小图:
+转base64, svg, css, iconFont
+
+大图:
 压缩
 js动态检测设备尺寸加载适配的图片
 img标签/业务图片/(产品图片): 懒加载
 非业务图片(icon): 转背景图, 雪碧图
+
+## 其他
+1. 启动硬件加速
+最常用的方式：translate3d、translateZ、transform
 
 
 
