@@ -69,8 +69,9 @@ z.publicAttr; //privateAttr: Tom
 
 ```
 
-## 分支
+## 分支中的单例
 根据环境条件生成需要的对象. 优点是减少执行过程中的判断(`if`), 一次生成需要的对象. 缺点是对象被创建保存在内存;
+(一次判断生成的: 函数用重载, 对象用单例分支)
 
 ```js
 //例1
@@ -111,4 +112,29 @@ var simpleXhrFactory = (function(){
 
   throw new Error('SimpleHandler: could not create an XHR object.');
 })()
+```
+
+
+## 透明的单例模式(类)
+没有模块模式方便, 仅适合改造非单例类;
+
+```js
+var CreateIns = (function(){
+  var instance;
+
+  var obj = function(name) {
+    if (instance) {
+      return instance;
+    }
+    this.name = name || '';
+    this.init();
+    return instance = this;
+  }
+
+  obj.prototype.init = function(){
+    /*...*/
+  }
+
+  return obj;
+})();
 ```
