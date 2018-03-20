@@ -5,8 +5,10 @@
 2. 惰性实例化
 3. 分支
 
-## 模块模式
-类似字面量;
+## 应用场景
+1. 避免重复生成DOM: modal
+
+## 模块(实例)模式
 
 ```js
 Singleton = (function() {
@@ -137,4 +139,15 @@ var CreateIns = (function(){
 
   return obj;
 })();
+```
+
+
+## 通用的惰性单例
+```js
+var getSingle = function(fn) {
+  var result;
+  return function() {
+    return result || (result = fn.apply(this, arguments));
+  }
+}
 ```
