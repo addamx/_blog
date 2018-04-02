@@ -17,5 +17,5 @@ PureComponent已经定义好了shouldUpdateComponent, 每次对props和state只�
   - Object要render, 要是用`Object.assign({}, ....)`返回新对象
 - 结合 `immutable` 数据就可以很好地去做更新判断；
 
-> 参考 `github\_blog\Js\react\Stateless Function Component(SFC)__Pure Component.md`
+
   

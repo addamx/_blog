@@ -10,11 +10,9 @@ function swap(i, j, array) {
 var bubbleSort = function (arr) {
 
   var len = arr.length;
-  var _r = 0;
   for (var i = 1; i < len; i++) {
 
     var isSwap = false;
-
 
     for (var j = 0; j < len - i; j++) {
       if (arr[j] > arr[j + 1]) {
@@ -39,7 +37,6 @@ console.log(bubbleSort(arr))
 /* ---------------双向冒泡排序------------------- */
 var bothwayBubbleSort = function (arr){
   var st = 0, ed = arr.length - 1, isSwap = false;
-  var _r = 0;
   while(st < ed + 1) {
     //ed->st, 取最小值
     var i = ed;
@@ -66,7 +63,6 @@ var bothwayBubbleSort = function (arr){
     }
     ed--;
   }
-  console.log('循环次数: ' + _r );
   return arr;
 }
 
