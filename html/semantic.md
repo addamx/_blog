@@ -45,7 +45,7 @@ HTML语义化就是**根据具体内容，选择合适的HTML标签进行代码�
 
 
 # 页面结构
-
+![page-structors](../_media/page-structure.gif)
 ```html
 <header>
   <div id="logo">HTML</div>
