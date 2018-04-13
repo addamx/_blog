@@ -149,23 +149,3 @@ HTML 语义化就是**根据具体内容，选择合适的 HTML 标签进行代�
    =<output name="x" for="a b"></output>
 </form>
 
-* input 强制在手机中使用数字键盘
-  Android:
-
-```html
-<input type="number">
-<input type="tel" />
-<input type="numeric" />
-```
-
-ios:
-
-```html
-<input pattern="[0-9]*">
-```
-
-完整:
-
-```html
-<input type="number" min="0" inputmode="numeric" pattern="[0-9]*">
-```
