@@ -4,6 +4,9 @@ function swap(i, j, array) {
   var temp = array[j];
   array[j] = array[i];
   array[i] = temp;
+
+  // ES6
+  // [array[i], array[j]] = [array[j], array[i]];
 }
 
 /* ---------------冒泡排序: 内外正------------------- */
@@ -119,7 +122,7 @@ var binaryInsertionSort = function (array){
     array[low] = current;         //步骤4:插入该元素
   }
   return array;
-} 
+}
 
 console.log('\n')
 console.log('折半插入排序:')
@@ -147,10 +150,33 @@ function directInsertionSort(array, gap) {
 }
 
 function shellSort(array){
-  var length = array.length, gap = length>>1, current, i, j;
+  var length = array.length, gap = length>>1;
   while(gap > 0){
     directInsertionSort(array, gap); //按指定步长进行直接插入排序
     gap = gap>>1;
   }
   return array;
+}
+
+
+/* ---------------快速排序------------------ */
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  var pivotIndex = Math.floor(arr.length / 2);
+  var pivot = arr.splice(pivotIndex, 1)[0];
+  var left = [];
+  var right = [];
+
+  for(var i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i])
+    }
+  }
+
+  return quickSort(left).concat([pivot], quickSort(right));
 }
